@@ -1,0 +1,6 @@
+** Setting up react native firebase using Expo cli
+1- Create a new project in Firebase console
+2- npm install --save @react-native-firebase/app
+3- Create a Web app in firebase
+4- npm install firebase@9.6.11
+5- Create a new folder firebase and inside it create a new file as (firebase.config.js)
