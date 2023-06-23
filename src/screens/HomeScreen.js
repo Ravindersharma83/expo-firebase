@@ -5,7 +5,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import NoContactFound from '../components/NoContactFound';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
     useEffect(()=>{
       onAuthStateChanged(auth,(user)=>{
         console.log('user----',user);
@@ -13,7 +13,7 @@ const HomeScreen = () => {
     },[])
   return (
     <>
-    <NoContactFound/>
+    <NoContactFound navigation={navigation}/>
     </>
   )
 }

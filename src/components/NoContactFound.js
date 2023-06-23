@@ -2,7 +2,7 @@ import { StyleSheet, Text, View,Image } from 'react-native'
 import React from 'react';
 import Button from './Button';
 
-const NoContactFound = () => {
+const NoContactFound = ({navigation}) => {
   return (
     <View style={{flex:1}}>
     <View style={styles.container}>
@@ -14,7 +14,7 @@ const NoContactFound = () => {
     <View style={styles.noContact}>
       <Text style={{marginLeft:'15%',fontSize:30,color:'#FF1493'}}>No Contact Found !</Text>
       <View style={{marginLeft:'15%'}}>
-        <Button title='Add New Contact'/>
+        <Button title='Add New Contact' onPress={()=>navigation.navigate('AddContact')}/>
       </View>
     </View>
   </View>
