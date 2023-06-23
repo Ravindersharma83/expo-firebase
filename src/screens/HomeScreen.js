@@ -1,7 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Image } from 'react-native'
 import React, { useEffect } from 'react'
 import { auth } from "../../firebase/firebase.config";
 import { onAuthStateChanged } from 'firebase/auth';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import NoContactFound from '../components/NoContactFound';
 
 const HomeScreen = () => {
     useEffect(()=>{
@@ -10,12 +12,13 @@ const HomeScreen = () => {
       })
     },[])
   return (
-    <View>
-      <Text>HomeScreen</Text>
-    </View>
+    <>
+    <NoContactFound/>
+    </>
   )
 }
 
 export default HomeScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+})
