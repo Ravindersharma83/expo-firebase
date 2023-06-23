@@ -29,14 +29,14 @@ const Input = ({label,iconName,error,password,onFocus=()=>{},...props}) => {
             style={{color:COLORS.darkBlue}} 
             {...props}
             />
+          {password && (
+            <MaterialCommunityIcons
+              onPress={() => setHidePassword(!hidePassword)}
+              name={hidePassword ? 'eye-outline' : 'eye-off-outline'}
+              style={{color: COLORS.darkBlue, fontSize: 22,marginTop:11,marginLeft:15}}
+            />
+          )}
          </View>
-    //     {password && (
-    //       <MaterialCommunityIcons
-    //         onPress={() => setHidePassword(!hidePassword)}
-    //         name={hidePassword ? 'eye-outline' : 'eye-off-outline'}
-    //         style={{color: COLORS.darkBlue, fontSize: 22,marginTop:15}}
-    //       />
-    //     )}
     //   </View>
     //     {error && (
     //         <Text style={{marginTop: 7, color: COLORS.red, fontSize: 12}}>

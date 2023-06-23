@@ -5,8 +5,6 @@ import {
   Text,
   View,
   Image,
-  TextInput,
-  onPress,
   TouchableOpacity,
   Alert,
 } from "react-native";
@@ -14,7 +12,6 @@ import { auth } from "../../firebase/firebase.config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import COLORS from "../constants/colors";
 
 
 const LoginScreen = ({navigation}) => {
@@ -48,8 +45,9 @@ const LoginScreen = ({navigation}) => {
         }
         signInWithEmailAndPassword(auth, inputs.email, inputs.password)
         .then((userCredential) => {
-            const user = userCredential.user.email;
-            Alert.alert("you are logged in as "+user);
+            const user = userCredential.user;
+            console.log('up---',user);
+            Alert.alert("Welcome "+user.displayName + " !");
             navigation.navigate('Home')
         })
         .catch((error) => {
@@ -66,7 +64,7 @@ const LoginScreen = ({navigation}) => {
     <StatusBar style="auto" />
       <Input
         iconName="email-alert-outline"
-        placeholder="Enter your email address"
+        placeholder="Enter your Email Address"
         onChangeText={text => handleOnChange(text,'email')}
         error={errors.email}
         onFocus={()=>{
@@ -75,16 +73,17 @@ const LoginScreen = ({navigation}) => {
       />
       <Input
         iconName="lock-outline"
-        placeholder="Enter your password"
+        placeholder="Enter your Password"
+        password
         onChangeText={text => handleOnChange(text,'password')}
         error={errors.password}
         onFocus={()=>{
           handleError(null,"password")
         }}
       />
-      <Button title='Login' onPress={login}/>
+      <Button title='Sign In' onPress={login}/>
       <TouchableOpacity style={{marginTop:10}} onPress={()=>navigation.navigate('Register')}>
-        <Text style={{color:'blue'}}>Do Not Have Account ? Register</Text>
+        <Text style={{color:'blue'}}>Do Not Have An Account ? Sign Up</Text>
       </TouchableOpacity>
   </View>
   )

@@ -29,3 +29,7 @@
     - In app.js (import 'react-native-gesture-handler';)
     - expo start -c 
 
+7- Creating Sign and Sign up screen using Custom Input and Button components.
+8- Enable firestore database and storage in production mode.
+9- For Sign Up - First we enable cloud firestore and storage then change their rules permission.
+10- Follow the code written on login and register methods to get to know how signup and sign with firebase is implemented.
