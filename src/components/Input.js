@@ -4,7 +4,7 @@ import COLORS from '../constants/colors';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 
 
-const Input = ({label,iconName,error,password,onFocus=()=>{},...props}) => {
+const Input = ({label,iconName,error,password,onFocus=()=>{},onPress=()=>{},...props}) => {
     const [hidePassword, setHidePassword] = useState(password);
     const [isFocused, setIsFocused] = useState(false);
   return (
@@ -51,12 +51,13 @@ export default Input
 
 const styles = StyleSheet.create({
     inputView: {
-        backgroundColor: "#FFC0CB",
+        backgroundColor: "#f7f2f5",
         borderRadius: 30,
-        width: "70%",
+        width: "90%",
         height: 45,
         marginBottom: 20,
-        flexDirection:"row"
+        flexDirection:"row",
+        borderWidth:1
         // alignItems: "center",
       },
       TextInput: {
