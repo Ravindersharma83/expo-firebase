@@ -2,9 +2,10 @@ import { StyleSheet, Text, View,TouchableOpacity } from 'react-native'
 import React from 'react'
 import COLORS from '../constants/colors'
 
-const Button = ({title, onPress = () => {}}) => {
+const Button = ({title, onPress = () => {},...props}) => {
+  // console.log('props--',props.disabled);
   return (
-    <TouchableOpacity style={styles.loginBtn} onPress={onPress}>
+    <TouchableOpacity style={[styles.loginBtn,style={opacity:props.disabled ? 0.5 : 1}]} onPress={onPress} disabled={props.disabled}>
     <Text style={styles.loginText}>{title}</Text> 
   </TouchableOpacity> 
   )
