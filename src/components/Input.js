@@ -4,7 +4,7 @@ import COLORS from '../constants/colors';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 
 
-const Input = ({label,iconName,error,password,onFocus=()=>{},onPress=()=>{},...props}) => {
+const Input = ({label,iconName,value,error,password,onFocus=()=>{},onPress=()=>{},...props}) => {
     const [hidePassword, setHidePassword] = useState(password);
     const [isFocused, setIsFocused] = useState(false);
   return (
@@ -25,6 +25,7 @@ const Input = ({label,iconName,error,password,onFocus=()=>{},onPress=()=>{},...p
                 onFocus();
                 setIsFocused(true);
             }}
+            value={value}
             onBlur={() => setIsFocused(false)}
             style={{color:COLORS.darkBlue}} 
             {...props}

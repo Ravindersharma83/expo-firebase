@@ -114,6 +114,13 @@ const AddContactScreen = ({navigation}) => {
     setInputs(prevState => ({...prevState, [input]:text}));
   }
 
+  const clearFields = () => {
+    setInputs({
+      contact_name: '',
+      mobile: ''
+    });
+  };
+
   // save contact detail in firestore
   const saveContact = async ()=>{
     const contactData = {...inputs};
@@ -124,11 +131,12 @@ const AddContactScreen = ({navigation}) => {
     const docRef = await addDoc(collection(db, "contacts"), contactData)
     .then(()=>{
       setImage(null);
-      setInputs({contact_name:null,mobile:null});
+      // setInputs({ contact_name: '', mobile: '' });
       setDate(new Date());
       setDisabled(true);
       alert("Contact Saved !");
     });
+    clearFields();
     navigation.navigate("Home");
     
   }
@@ -148,11 +156,13 @@ const AddContactScreen = ({navigation}) => {
           iconName="account"
           placeholder="Contact Name"
           onChangeText={text => handleOnChange(text,'contact_name')}
+          value={contact_name}
         />
         <Input
           iconName="cellphone"
           placeholder="Mobile Number"
           onChangeText={text => handleOnChange(text,'mobile')}
+          value={mobile}
         />
         <TouchableOpacity onPress={showDatepicker}>
           <View style={styles.inputView}>
