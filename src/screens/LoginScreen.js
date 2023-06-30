@@ -12,9 +12,15 @@ import { auth } from "../../firebase/firebase.config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
+
+//fetching data from LoginProvider Context
+import { useLogin } from "../context/LoginProvider";
 
 
 const LoginScreen = ({navigation}) => {
+    const {setIsLoggedIn,setProfile,isLoggedIn} = useLogin();
     const[inputs,setInputs] = useState({
       email:'',
       password:''
@@ -46,9 +52,16 @@ const LoginScreen = ({navigation}) => {
         signInWithEmailAndPassword(auth, inputs.email, inputs.password)
         .then((userCredential) => {
             const user = userCredential.user;
-            console.log('up---',user);
-            Alert.alert("Welcome "+user.displayName + " !");
-            navigation.navigate('Home')
+            try {
+              AsyncStorage.setItem('user',JSON.stringify(user))
+              AsyncStorage.setItem('loggedIn', JSON.stringify(true))
+              setIsLoggedIn(true);
+              setProfile(user);// res.data (api logged in data)
+              Alert.alert("Welcome "+user.displayName + " !");
+            } catch (error) {
+              Alert.alert("Error","Something went wrong");
+            }
+            // navigation.navigate('Home')
         })
         .catch((error) => {
             const errorCode = error.code;

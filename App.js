@@ -32,10 +32,14 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import StackScreenNavigator from "./src/navigation/StackScreenNavigator";
 
+import LoginProvider from "./src/context/LoginProvider";
+
 export default function App(){
   return(
+    <LoginProvider>
       <NavigationContainer>
         <StackScreenNavigator/>
       </NavigationContainer>
+    </LoginProvider>
   )
 }

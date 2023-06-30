@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View,Image,TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
     createDrawerNavigator,
     DrawerContentScrollView,
@@ -8,11 +8,27 @@ import {
 import HomeScreen from '../screens/HomeScreen';
 import AddContactScreen from '../screens/AddContactScreen';
 import NoContactFound from '../components/NoContactFound';
+import { useLogin } from '../context/LoginProvider';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Drawer = createDrawerNavigator();
 
 const CustomDrawer = props => {
+  const { setIsLoggedIn, profile, setProfile } = useLogin();
+  useEffect(()=>{
+    getUserDetail();
+  },[])
+  const getUserDetail = async()=>{
+    const userDetail = await AsyncStorage.getItem('user',(err, value) => {
+        if (err) {
+            Alert.alert("No data found");
+        } else {
+          // console.log('user-----',JSON.parse(value));
+          setProfile(JSON.parse(value)) 
+        }
+      })
+    }
     return (
       <View style={{ flex: 1 }}>
         <DrawerContentScrollView {...props}>
@@ -27,7 +43,7 @@ const CustomDrawer = props => {
             }}
           >
             <View>
-              <Text>Ravinder</Text>
+              <Text>{profile.displayName}</Text>
             </View>
             <Image
               source={{
@@ -48,11 +64,12 @@ const CustomDrawer = props => {
             backgroundColor: '#f6f6f6',
             padding: 20,
           }}
-        //   onPress={() => {
-        //       setIsLoggedIn(false)
-        //       AsyncStorage.setItem('loggedIn', JSON.stringify(false))
+          onPress={() => {
+              setIsLoggedIn(false)
+              AsyncStorage.setItem('loggedIn', JSON.stringify(false))
+              AsyncStorage.setItem('user',JSON.stringify({}))
           
-        //   }}
+          }}
         >
           <Text>Log Out</Text>
         </TouchableOpacity>

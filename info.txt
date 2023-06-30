@@ -33,3 +33,9 @@
 8- Enable firestore database and storage in production mode.
 9- For Sign Up - First we enable cloud firestore and storage then change their rules permission.
 10- Follow the code written on login and register methods to get to know how signup and sign with firebase is implemented.
+
+** Login and Login Setup using Context Api and local storage **
+1- Create a LoginProvider context for managing login user state.
+2- Set (setIsLoggedIn,setProfile) values while user successfully completed login process (When User Login).
+3- Fetch data from AsyncStorage and update Context data based on it for managing user login details throught app.
+4- Empty the AsyncStorage values and Context data while logging out (When User Logout).

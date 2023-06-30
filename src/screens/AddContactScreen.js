@@ -13,10 +13,12 @@ import { db, storage } from '../../firebase/firebase.config';
 import { auth } from "../../firebase/firebase.config";
 import { onAuthStateChanged } from 'firebase/auth';
 import { addDoc, collection } from '@firebase/firestore';
+import { useLogin } from '../context/LoginProvider';
 
 
 
 const AddContactScreen = ({navigation}) => {
+  const {profile} = useLogin();
   const[inputs,setInputs] = useState({
     contact_name:'',
     mobile:'',
@@ -36,7 +38,7 @@ const AddContactScreen = ({navigation}) => {
     onAuthStateChanged(auth,(user)=>{
       // console.log('user----',user.uid);
       setUserId(user ? user.uid : Date.now().toString());
-      // console.log('navigation',navigation);
+      console.log('login user profile---',profile.uid);
     })
   },[])
 
@@ -126,8 +128,9 @@ const AddContactScreen = ({navigation}) => {
     const contactData = {...inputs};
     contactData.dob = date.toString();
     contactData.image = picture;
-    contactData.user_id = userId ? userId : Date.now().toString();
-    console.log('contact-data',contactData);
+    // contactData.user_id = userId ? userId : Date.now().toString();
+    contactData.user_id = profile.uid;
+    // console.log('contact-data',contactData);
     const docRef = await addDoc(collection(db, "contacts"), contactData)
     .then(()=>{
       setImage(null);
