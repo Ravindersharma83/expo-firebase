@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, Alert } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Input from '../components/Input';
 import Button from '../components/Button';
@@ -137,7 +137,7 @@ const AddContactScreen = ({navigation}) => {
       // setInputs({ contact_name: '', mobile: '' });
       setDate(new Date());
       setDisabled(true);
-      alert("Contact Saved !");
+      Alert.alert("Contact Saved Successfully !");
     });
     clearFields();
     navigation.navigate("Home");

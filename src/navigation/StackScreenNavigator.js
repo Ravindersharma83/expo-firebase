@@ -7,6 +7,7 @@ import DrawerScreenNavigator from './DrawerScreenNavigator';
 import NoContactFound from '../components/NoContactFound';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useLogin } from '../context/LoginProvider';
+import ContactDetailScreen from '../screens/ContactDetailScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -18,6 +19,7 @@ const StackNavigator = () => {
         <Stack.Screen component={LoginScreen} name='Login' />
         <Stack.Screen component={RegisterScreen} name='Register' />
         <Stack.Screen component={NoContactFound} name='NotFound' />
+        <Stack.Screen component={ContactDetailScreen} name='ContactDetail' />
       </Stack.Navigator>
     );
   };

@@ -12,12 +12,13 @@ const HomeScreen = ({navigation}) => {
   const {profile} = useLogin();
     const [loading, setLoading] = useState(true);
     const[contacts,setContacts] = useState([]);
+    const[contactId,setContactId] = useState(null);
+
     useFocusEffect(
     React.useCallback(() => {
       getUserId()
     },[])
   )
-
     const getUserId = async()=>{
       const userDetail = await AsyncStorage.getItem('user_id',(err, value) => {
           if (err) {
@@ -33,11 +34,16 @@ const HomeScreen = ({navigation}) => {
       const getContactsData = async (uid)=>{
       setLoading(true);
       console.log('login id' , uid);
-      const q = query(collection(db,"contacts"), where("user_id","==",uid));
+      const q = query(collection(db, "contacts"), where("user_id", "==", uid));
       const querySnapshot = await getDocs(q);
-      const contactsData = querySnapshot.docs.map((doc) => doc.data());
+      // const contactsData = querySnapshot.docs.map((doc) =>doc.data());
+      const contactsData = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        cid: doc.id,
+      }));
       setLoading(false);
       setContacts(contactsData);
+      console.log(contactsData);
     }
 
 
@@ -48,7 +54,7 @@ const HomeScreen = ({navigation}) => {
             <FlatList
             data={contacts.sort((a, b) => a.contact_name.localeCompare(b.contact_name))}
             keyExtractor={(item) => item.id}
-            renderItem={({ item }) => <ContactList contact={item} />}
+            renderItem={({ item }) => <ContactList contact={item} navigation={navigation} />}
             />
       : loading ?  
         <View style={styles.loading}><ActivityIndicator size='large' color='blue'  /></View> : 

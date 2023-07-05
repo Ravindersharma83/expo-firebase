@@ -10,9 +10,22 @@ import AddContactScreen from '../screens/AddContactScreen';
 import NoContactFound from '../components/NoContactFound';
 import { useLogin } from '../context/LoginProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import ContactDetailScreen from '../screens/ContactDetailScreen';
 
 
 const Drawer = createDrawerNavigator();
+const Stack = createNativeStackNavigator();
+
+function Root() {
+  return (
+    <Stack.Navigator screenOptions={{
+      headerShown: false
+    }}>
+      <Stack.Screen name="ContactDetail" component={ContactDetailScreen} />
+    </Stack.Navigator>
+  );
+}
 
 const CustomDrawer = props => {
   const { setIsLoggedIn, profile, setProfile } = useLogin();
@@ -48,7 +61,7 @@ const CustomDrawer = props => {
             <Image
               source={{
                 uri:
-                  'https://images.unsplash.com/photo-1624243225303-261cc3cd2fbc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80',
+                  'https://img.freepik.com/premium-vector/young-smiling-man-avatar-man-with-brown-beard-mustache-hair-wearing-yellow-sweater-sweatshirt-3d-vector-people-character-illustration-cartoon-minimal-style_365941-860.jpg?w=826',
               }}
               style={{ width: 60, height: 60, borderRadius: 30 }}
             />
@@ -95,6 +108,7 @@ const DrawerScreenNavigator = () => {
         >
           <Drawer.Screen component={HomeScreen} name='Home' />
           <Drawer.Screen component={AddContactScreen} name='AddContact' />
+          <Drawer.Screen component={Root} name="Root" options={{drawerItemStyle: { height: 0 }}} />
         </Drawer.Navigator>
       );
 }

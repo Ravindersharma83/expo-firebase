@@ -3,7 +3,14 @@ import React, { useEffect } from 'react';
 import { Feather } from '@expo/vector-icons'; 
 import call from 'react-native-phone-call';
 
-const ContactList = ({contact}) => {
+const ContactList = ({contact,navigation}) => {
+  const fetchContactDetail = (contactDetail)=>{
+    console.log(navigation.navigate);
+    navigation.navigate('Root', { 
+      screen: 'ContactDetail',
+      params: {contactDetail:contactDetail}
+    });
+  }
     // to make a call we need to install external package called - react-native-phone-call
     const triggerCall = (phone_number)=>{
       if(phone_number){
@@ -17,7 +24,7 @@ const ContactList = ({contact}) => {
     }
   return (
     <>
-    <TouchableOpacity>
+    <TouchableOpacity onPress={()=>fetchContactDetail(contact)}>
     <View
       style={{
         flexDirection: 'row',
