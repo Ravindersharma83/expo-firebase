@@ -54,6 +54,7 @@ const LoginScreen = ({navigation}) => {
             const user = userCredential.user;
             try {
               AsyncStorage.setItem('user',JSON.stringify(user))
+              AsyncStorage.setItem('user_id',JSON.stringify(user.uid))
               AsyncStorage.setItem('loggedIn', JSON.stringify(true))
               setIsLoggedIn(true);
               setProfile(user);// res.data (api logged in data)

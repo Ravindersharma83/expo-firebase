@@ -66,8 +66,10 @@ const CustomDrawer = props => {
           }}
           onPress={() => {
               setIsLoggedIn(false)
+              setProfile({});
               AsyncStorage.setItem('loggedIn', JSON.stringify(false))
               AsyncStorage.setItem('user',JSON.stringify({}))
+              AsyncStorage.setItem('user_id',JSON.stringify(null))
           
           }}
         >

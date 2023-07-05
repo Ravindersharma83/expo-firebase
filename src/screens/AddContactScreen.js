@@ -164,6 +164,7 @@ const AddContactScreen = ({navigation}) => {
         <Input
           iconName="cellphone"
           placeholder="Mobile Number"
+          keyboardType="numeric"
           onChangeText={text => handleOnChange(text,'mobile')}
           value={mobile}
         />

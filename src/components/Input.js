@@ -4,7 +4,7 @@ import COLORS from '../constants/colors';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 
 
-const Input = ({label,iconName,value,error,password,onFocus=()=>{},onPress=()=>{},...props}) => {
+const Input = ({label,keyboardType,iconName,value,error,password,onFocus=()=>{},onPress=()=>{},...props}) => {
     const [hidePassword, setHidePassword] = useState(password);
     const [isFocused, setIsFocused] = useState(false);
   return (
@@ -21,6 +21,7 @@ const Input = ({label,iconName,value,error,password,onFocus=()=>{},onPress=()=>{
             <TextInput
             secureTextEntry={hidePassword}
             autoCorrect={false}
+            keyboardType={keyboardType}
             onFocus={() => {
                 onFocus();
                 setIsFocused(true);

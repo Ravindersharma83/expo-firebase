@@ -1,17 +1,19 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Feather } from '@expo/vector-icons'; 
 import call from 'react-native-phone-call';
 
 const ContactList = ({contact}) => {
     // to make a call we need to install external package called - react-native-phone-call
     const triggerCall = (phone_number)=>{
+      if(phone_number){
         const args = {
             number: phone_number.toString(),
             prompt: true,
           };
           // Make a call
           call(args).catch(console.error);
+      }
     }
   return (
     <>
@@ -37,9 +39,9 @@ const ContactList = ({contact}) => {
       />
       <View style={{ flex: 1, marginLeft:10 }}>
         <Text style={{ fontSize: 16 }}>{contact.contact_name}</Text>
-        <Text style={{ fontSize: 14, color: '#888' }}>{contact.contact_mobile}</Text>
+        <Text style={{ fontSize: 14, color: '#888' }}>{contact.mobile}</Text>
       </View>
-      <TouchableOpacity onPress={()=>triggerCall(contact.contact_mobile)}>
+      <TouchableOpacity onPress={()=>triggerCall(contact.mobile)}>
         <Feather name="phone-call" size={24} color="green" style={{ width: 30, height: 30,marginRight:10 }} />
       </TouchableOpacity>
     </View>
