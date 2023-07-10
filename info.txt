@@ -39,3 +39,29 @@
 2- Set (setIsLoggedIn,setProfile) values while user successfully completed login process (When User Login).
 3- Fetch data from AsyncStorage and update Context data based on it for managing user login details throught app.
 4- Empty the AsyncStorage values and Context data while logging out (When User Logout).
+
+
+** Build apk file **
+- npm install -g eas-cli
+- eas build -p android
+- Add this code in eas.json file
+{
+  "build": {
+    "preview": {
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "preview2": {
+      "android": {
+        "gradleCommand": ":app:assembleRelease"
+      }
+    },
+    "preview3": {
+      "developmentClient": true
+    },
+    "production": {}
+  }
+}
+
+- Run - eas build -p android --profile preview
